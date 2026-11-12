@@ -3,6 +3,7 @@ import pandas as pd
 from auth import logout
 from database import get_prediction_history
 from persistent_session import restore_persistent_session
+from theme import apply_theme_css
 
 restore_persistent_session()
 
@@ -17,23 +18,15 @@ hide_streamlit_style = """
     /* Hide the "Made with Streamlit" footer */
     .css-1d391kg {visibility: hidden;}
 
-    /* Hide the three-dot menu in the top right */
-    button[title="View fullscreen"] {visibility: hidden;}
-
-    /* Hide the GitHub icon and other toolbar items */
-    .css-14xtw13.e8zbici0 {visibility: hidden;}
-
-    /* Hide toolbar elements but preserve sidebar controls */
-    [data-testid="stDecoration"] {visibility: hidden;}
-
+    /* Keep Streamlit's top header and toolbar available. */
     /* Show status widget (includes running indicator) */
     [data-testid="stStatusWidget"] {visibility: visible !important;}
 
-    /* Hide settings menu */
-    button[kind="header"] {visibility: hidden;}
+    /* Hide only the settings menu; keep sidebar collapse/expand controls available. */
+    button[title="Settings"] {visibility: hidden;}
 
     /* Keep sidebar toggle button visible */
-    button[data-testid="collapsedControl"] {visibility: visible !important;}
+    button[data-testid="collapsedControl"], [data-testid="stSidebarCollapseButton"] {display: inline-flex !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important;}
 
     /* Keep the sidebar toggle area visible */
     [data-testid="stSidebarNav"] {visibility: visible !important;}
@@ -44,24 +37,22 @@ hide_streamlit_style = """
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+# Keep the Streamlit running indicator and sidebar toggle, but hide page toolbar actions.
+st.markdown("""<style>
+[data-testid="stToolbarActions"] { display: none !important; visibility: hidden !important; }
+[data-testid="stMainMenu"], button[aria-label="Main menu"], button[title="Main menu"] { display: none !important; visibility: hidden !important; }
+[data-testid="stStatusWidget"] { display: flex !important; visibility: visible !important; opacity: 1 !important; }
+[data-testid="stSidebarCollapseButton"], button[data-testid="collapsedControl"] { visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; }
+</style>""", unsafe_allow_html=True)
+
 
 
 if st.session_state.get("user") is None:
     st.warning("You have been logged out. Please log in again from the home page.")
     st.stop()  
 
-# ================= LOAD CSS =================
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(
-            f"<style>{f.read()}</style>",
-            unsafe_allow_html=True
-        )
-
-
-
-# ================= APPLY CSS =================
-local_css("styles.css")
+# ================= APPLY ACTIVE THEME =================
+apply_theme_css()
 
 
 # ---------------- LOGIN CHECK ----------------
@@ -70,13 +61,18 @@ if "user" not in st.session_state:
     st.stop()
 
 
-# ---------------- PAGE TITLE ----------------
-st.title("Your Prediction History")
+# ---------------- PAGE HERO ----------------
+user_email = st.session_state["user"].email
+st.markdown(f'''
+<div class="hero-section">
+  <div class="hero-title">Prediction History</div>
+  <div class="hero-subtitle">Review and download your previous tuberculosis and HIV/AIDS screening results</div>
+  <div class="hero-meta">Signed in as: <b>{user_email}</b></div>
+</div>
+''' , unsafe_allow_html=True)
 
 
 # ---------------- GET USER DATA ----------------
-user_email = st.session_state["user"].email
-
 data = get_prediction_history(user_email)
 
 
