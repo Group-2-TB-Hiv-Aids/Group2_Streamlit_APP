@@ -570,20 +570,13 @@ def auth_page():
                     st.markdown('<div class="title">Create Account</div>', unsafe_allow_html=True)
                     st.markdown('<div class="subtitle">Join the system</div>', unsafe_allow_html=True)
 
-                    st.markdown(
-                        '<div style="text-align:center;margin:8px 0 18px;">'
-                        '<a href="?view=terms" target="_self">Read Terms & Conditions and Privacy Notice</a>'
-                        '</div>',
-                        unsafe_allow_html=True
-                    )
-
                     with st.form("signup_form"):
                         name = st.text_input("Full Name", placeholder="Enter your full name")
                         email = st.text_input("Email", placeholder="Enter your email")
                         password = st.text_input("Password", type="password")
                         confirm_password = st.text_input("Confirm Password", type="password")
                         terms = st.checkbox(
-                            "I have read and agree to the Terms & Conditions and Privacy Notice, including the collection and processing of my questionnaire and health-related information described in Section 7."
+                            "[I have read and agree to the Terms & Conditions](?view=terms)"
                         )
                         signup_btn = st.form_submit_button("Create Account", use_container_width=True)
 
