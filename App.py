@@ -226,6 +226,19 @@ def auth_page():
 
     
         
+    if st.query_params.get("view") == "terms":
+        terms_file = Path(__file__).resolve().parent / "TERMS_AND_CONDITIONS.md"
+        st.title("Terms & Conditions and Privacy Notice")
+        if terms_file.exists():
+            st.markdown(terms_file.read_text(encoding="utf-8"))
+        else:
+            st.error("The Terms & Conditions document could not be loaded.")
+        if st.button("Back to Create Account"):
+            st.query_params.clear()
+            st.session_state.auth_mode = "signup"
+            st.rerun()
+        return
+
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1]) 
 
     with col2:
@@ -557,21 +570,20 @@ def auth_page():
                     st.markdown('<div class="title">Create Account</div>', unsafe_allow_html=True)
                     st.markdown('<div class="subtitle">Join the system</div>', unsafe_allow_html=True)
 
-                    terms_file = Path(__file__).resolve().parent / "TERMS_AND_CONDITIONS.md"
-                    with st.expander("Read Terms & Conditions and Privacy Notice", expanded=False):
-                        if terms_file.exists():
-                            st.markdown(terms_file.read_text(encoding="utf-8"))
-                        else:
-                            st.error("The Terms & Conditions document could not be loaded. Please contact the project administrator.")
+                    st.markdown(
+                        '<div style="text-align:center;margin:8px 0 18px;">'
+                        '<a href="?view=terms" target="_self">Read Terms & Conditions and Privacy Notice</a>'
+                        '</div>',
+                        unsafe_allow_html=True
+                    )
 
                     with st.form("signup_form"):
                         name = st.text_input("Full Name", placeholder="Enter your full name")
                         email = st.text_input("Email", placeholder="Enter your email")
                         password = st.text_input("Password", type="password")
                         confirm_password = st.text_input("Confirm Password", type="password")
-                        terms = st.checkbox("I have read and agree to the Terms & Conditions and Privacy Notice.")
-                        health_data_consent = st.checkbox(
-                            "I explicitly consent to the collection, storage, and processing of my questionnaire and health-related information for the screening, prediction-history, and administration purposes described in the Privacy Notice."
+                        terms = st.checkbox(
+                            "I have read and agree to the Terms & Conditions and Privacy Notice, including the collection and processing of my questionnaire and health-related information described in Section 7."
                         )
                         signup_btn = st.form_submit_button("Create Account", use_container_width=True)
 
@@ -592,10 +604,7 @@ def auth_page():
                             error_container.error("Passwords do not match.")
                             
                         elif not terms:
-                            error_container.error("You must read and agree to the Terms & Conditions and Privacy Notice.")
-                            
-                        elif not health_data_consent:
-                            error_container.error("You must provide explicit consent to the processing of questionnaire and health-related information to use the screening features.")
+                            error_container.error("You must agree to the Terms & Conditions and Privacy Notice before creating an account.")
                             
                         else:
                             with st.spinner("Creating your account..."):

@@ -9,7 +9,7 @@
 
 ## 1. Acceptance of these terms
 
-By creating an account or using the Disease Prediction System (“the System”), you confirm that you have read and understood these Terms and Conditions and the Privacy Notice. You must separately give the health-data consent shown during registration before using the questionnaire and prediction features. If you do not agree, do not create an account or submit questionnaire information.
+By creating an account or using the Disease Prediction System (“the System”), you confirm that you have read and understood these Terms and Conditions and the Privacy Notice. The single agreement checkbox during registration also records your express consent to the processing of questionnaire and health-related information as described in Section 7. If you do not agree, do not create an account or submit questionnaire information.
 
 The System is intended for adults aged 18 and above. Do not submit another person's personal or health information without their valid authority and consent.
 
@@ -77,9 +77,9 @@ We will not use questionnaire responses for a purpose incompatible with the purp
 
 ## 7. Health-data consent and lawful processing
 
-TB and HIV/AIDS questionnaire answers can constitute sensitive personal data under applicable data-protection law. By selecting the separate health-data consent checkbox during registration and then submitting questionnaire answers, you expressly consent to the collection, use, storage, and processing of those answers and the resulting screening records for the purposes explained in this notice.
+TB and HIV/AIDS questionnaire answers can constitute sensitive personal data under applicable data-protection law. During registration, you are asked to tick one agreement checkbox confirming that you have read and agree to these Terms and this Privacy Notice, including this health-information section. By ticking that checkbox and choosing to create an account, you expressly consent to the collection, use, storage, and processing of the questionnaire answers and resulting screening records for the purposes explained in this notice.
 
-You may decline or withdraw consent. If you do not provide the consent needed for health-data processing, you cannot use the questionnaire-based prediction features. Withdrawal does not make earlier processing unlawful where it was lawful at the time, and it may mean that the relevant features or saved history can no longer be provided.
+You may choose not to agree. If you do not agree, you should not create an account or use the questionnaire-based screening features. You may later withdraw consent by contacting the project operator using the privacy contact in Section 4. Withdrawal does not make earlier processing unlawful where it was lawful at the time, and it may mean that the relevant features or saved history can no longer be provided. The operator will explain any consequences and handle the request in accordance with applicable law.
 
 The System is intended to handle personal data in accordance with applicable requirements, including the Nigeria Data Protection Act 2023 where it applies. This notice does not replace the operator's responsibility to determine and document the appropriate lawful basis for each processing activity.
 
