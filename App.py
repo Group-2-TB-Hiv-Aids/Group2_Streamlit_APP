@@ -23,6 +23,7 @@ restore_persistent_session()
 
 hide_streamlit_style = """
     <style>
+    [data-testid="InputInstructions"] { display: none !important; visibility: hidden !important; }
     /* Hide the main menu (hamburger menu) but keep sidebar toggle */
 
     /* Hide the footer */

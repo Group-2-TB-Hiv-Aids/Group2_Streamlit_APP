@@ -715,3 +715,13 @@ header[data-testid="stHeader"] > div {
 
 /* App page only: keep the History and Admin hero positions unchanged. */
 .app-page-hero { margin-top: -12px !important; }
+
+@media (max-width: 768px) {
+  section[data-testid="stSidebar"][aria-expanded="false"] {
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+  }
+}
